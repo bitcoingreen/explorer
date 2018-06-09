@@ -5,6 +5,8 @@ An open source block explorer written in node.js.
 
 ### See it in action
 
+*  [Deutsche eMark](http://b.emark.tk/)
+*  [Jumbucks](http://explorer.getjumbucks.com)
 *  [Sphere](http://sphere.iquidus.io)
 *  [Vivo](http://vivo.explorerz.top:3003)
 *  [Florincoin](https://florincoin.info/info)
