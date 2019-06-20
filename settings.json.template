@@ -68,7 +68,8 @@
     "googleplus": false,
     "search": true,
     "movement": true,
-    "network": true
+    "network": true,
+    "masternodes": false
   },
 
   // index page (valid options for difficulty are POW, POS or Hybrid)
@@ -156,5 +157,11 @@
   "labels": {
   //  "JSoEdU717hvz8KQVq2HfcqV9A79Wihzusu": {"label": "Developers address", "type":"primary", "url":"http://example.com"},
   //  "JSWVXHWeYNknPdG9uDrcBoZHztKMFCsndw": {"label": "Cryptsy"}
+  },
+
+  // Masternode configuration
+  "masternodes": {
+    "enabled": false,
+    "collateral": 1000
   }
 }
