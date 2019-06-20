@@ -30,3 +30,5 @@ settings.json
 *.ico
 *.png
 
+package-lock.json
+
