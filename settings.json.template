@@ -40,6 +40,14 @@
     "port": 27017
   },
 
+  // Redis settings (request caching)
+  "redis": {
+    "enabled": false,
+    "address": "localhost:6379",
+    "db": 0,
+    "expire": 60
+  },
+
   //update script settings
   "update_timeout": 10,
   "check_timeout": 250,
