@@ -9,8 +9,7 @@ var express = require('express')
   , routes = require('./routes/index')
   , lib = require('./lib/explorer')
   , db = require('./lib/database')
-  , locale = require('./lib/locale')
-  , request = require('request');
+  , locale = require('./lib/locale');
 
 var app = express();
 
