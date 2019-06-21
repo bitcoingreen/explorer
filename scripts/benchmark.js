@@ -19,7 +19,7 @@ dbString = dbString + ':' + settings.dbsettings.port;
 dbString = dbString + "/IQUIDUS-BENCHMARK";
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbString, { useMongoClient: true }, function(err) {
+mongoose.connect(dbString, { useNewUrlParser: true }, function(err) {
   if (err) {
     console.log('Unable to connect to database: %s', dbString);
     console.log('Aborting');

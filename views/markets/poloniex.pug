@@ -12,7 +12,7 @@ block market_view
             renderer:$.jqplot.DateAxisRenderer,
             tickOptions:{formatString:'%R'},
             tickInterval: "2 hours",
-            
+
           },
           y2axis: {
             tickOptions:{formatString:'%.8f'},
@@ -37,26 +37,26 @@ block market_view
           <tr><td>low:</td><td>%s</td></tr> \
           <tr><td>close:</td><td>%s</td></tr></table>'
         }
-      }); 
-      $(window).resize(function () { 
+      });
+      $(window).resize(function () {
         plot2.replot( { resetAxes: false } );
       });
-    });        
+    });
   .row
-    .hidden-xs.col-md-12  
+    .hidden-xs.col-md-12
       #chart-panel.panel.panel-default
         .panel-heading
           strong #{settings.locale.poloniex} - #{marketdata.coin}/#{marketdata.exchange} - #{settings.locale.mkt_hours}
           a(href='#')
-            span.fa.fa-th-list.pull-right.view-summary.iquidus.market-toggle(data-toggle='tooltip', data-placement='bottom', title='#{settings.locale.mkt_view_summary}') 
+            span.fa.fa-th-list.pull-right.view-summary.iquidus.market-toggle(data-toggle='tooltip', data-placement='bottom', title=settings.locale.mkt_view_summary)
         .panel-body
           div#chart(style="width:100%;height:300px;")
       #summary-panel.panel.panel-default
         .panel-heading
           strong #{settings.locale.poloniex} - #{marketdata.coin}/#{marketdata.exchange} - #{settings.locale.mkt_hours}
           a(href='#')
-            span.fa.fa-line-chart.pull-right.view-chart.iquidus.market-toggle(data-toggle='tooltip', data-placement='bottom', title='#{settings.locale.mkt_view_chart}') 
-        table.table.table-bordered.summary-table 
+            span.fa.fa-line-chart.pull-right.view-chart.iquidus.market-toggle(data-toggle='tooltip', data-placement='bottom', title=settings.locale.mkt_view_chart)
+        table.table.table-bordered.summary-table
           thead
             tr
               th #{settings.locale.mkt_high}
@@ -82,7 +82,7 @@ block market_view
       .panel.panel-default
         .panel-heading
           strong Poloniex - #{marketdata.coin}/#{marketdata.exchange} - #{settings.locale.mkt_hours}
-        table.table.table-bordered.summary-table 
+        table.table.table-bordered.summary-table
           thead
             tr
               th #{settings.locale.mkt_high}
@@ -167,7 +167,7 @@ block market_view
                   td.hidden-xs
                     =trade.date
               else
-                tr.danger 
+                tr.danger
                   td.hidden-xs SELL
                   td
                     =trade.amount

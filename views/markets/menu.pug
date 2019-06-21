@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   script.
-    $(document).ready(function(){     
+    $(document).ready(function(){
       $('.order-table').dataTable( {
         info: false,
         paging: false,
@@ -14,7 +14,7 @@ block content
       });
       $('.market-toggle').tooltip({
         animation: true,
-        delay: { hide: 500 },   
+        delay: { hide: 500 },
       });
       $('.view-summary').on('click', function(){
         $('#chart-panel').hide();
@@ -33,8 +33,8 @@ block content
             each mkt in settings.markets.enabled
               if market == mkt
                 li.active
-                  a.navbar-link.loading(href='/markets/#{mkt}') #{settings.locale[mkt]}
+                  a.navbar-link.loading(href='/markets/'+mkt) #{settings.locale[mkt]}
               else
                 li
-                  a.navbar-link.loading(href='/markets/#{mkt}') #{settings.locale[mkt]}
+                  a.navbar-link.loading(href='/markets/'+mkt) #{settings.locale[mkt]}
     block market_view

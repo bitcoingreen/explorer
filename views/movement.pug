@@ -6,7 +6,7 @@ block content
     var colors = [ "#0071bc" ];
     $(document).ready(function(){
       function format_unixtime(unixtime) {
-        var a = new Date(unixtime*1000);  
+        var a = new Date(unixtime*1000);
         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         var year = a.getFullYear();
         var month = months[a.getMonth()];
@@ -27,11 +27,11 @@ block content
           min = '0' + min;
         if (sec < 10)
           sec = '0' + sec;
-        var time = date + suffix + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;   
+        var time = date + suffix + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
         return time;
       }
-      var rtable = $('#alerts-table').dataTable( {  
-        autoWidth: false,      
+      var rtable = $('#alerts-table').dataTable( {
+        autoWidth: false,
         searching: false,
         ordering: false,
         //responsive: true,
@@ -42,7 +42,7 @@ block content
           dataSrc: function ( json ) {
             for ( var i=0;i<json.data.length; i++ ) {
               json.data[i]['timestamp'] = format_unixtime(json.data[i]['timestamp']);
-              json.data[i]['txid'] = "<a href='/tx/" + json.data[i]['txid'] + "' target='_blank'>" + json.data[i]['txid'] + "</a>"
+              json.data[i]['txid'] = "<a href='/tx/" + json.data[i]['txid'] + "'>" + json.data[i]['txid'] + "</a>"
               var amount = json.data[i]['total'] / 100000000;
               if (amount > '#{flagb}') {
                 json .data[i]['total'] = "<label class='label label-danger'>" + amount + "</label>";
