@@ -2,7 +2,7 @@ doctype html
 html
   head
     title= settings.title
-    link(rel='stylesheet', href='/themes/'+settings.theme+'/bootstrap.min.css')
+    link(rel='stylesheet', href='/themes/' + settings.theme + '/bootstrap.min.css')
     link(rel='stylesheet', href='/vendor/jqplot/jquery.jqplot.css')
     link(rel='stylesheet', href='//cdn.datatables.net/plug-ins/725b2a2115b/integration/bootstrap/3/dataTables.bootstrap.css')
     link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
@@ -26,14 +26,12 @@ html
         $('##{active}').addClass('active');
         function update_stats(){
           $.ajax({url: '/ext/summary', success: function(json){
-            $("#supply").text(json.data[0].supply);
-            if (#{settings.masternodes.enabled} === true)
-              $("#circulating").text(json.data[0].circulating);
-
-            $("#difficulty").text(json.data[0].difficulty);
+            $("#supply").text(parseInt(parseFloat(json.data[0].supply).toFixed(0)).toLocaleString('en'));
+            $("#difficulty").text(parseFloat(json.data[0].difficulty).toFixed(2));
             $("#difficultyHybrid").text(json.data[0].difficultyHybrid);
-            $("#hashrate").text(json.data[0].hashrate);
-            $("#lastPrice").text(json.data[0].lastPrice.toFixed(8));
+            $("#hashrate").text(parseFloat(json.data[0].hashrate).toLocaleString('en'));
+            $("#lastPrice").text(parseFloat(json.data[0].lastPrice).toFixed(8) + ' #{settings.markets.exchange}'.toUpperCase());
+            $("#marketCap").text((parseFloat(json.data[0].lastPrice).toFixed(8) * parseInt(parseFloat(json.data[0].supply).toFixed(0))).toLocaleString('en') + ' #{settings.markets.exchange}'.toUpperCase());
             $("#lblConnections").text(json.data[0].connections + ' connections');
             $("#lblBlockcount").text(json.data[0].blockcount + ' blocks');
             $("#lblX1").text(' ');
@@ -91,9 +89,7 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/')
-            img(src=settings.logo)
-
+          a.navbar-brand(href='/') #{settings.title}
         .collapse.navbar-collapse(id='navbar-collapse')
           ul.nav.navbar-nav
             li#home
@@ -115,11 +111,6 @@ html
                 a.navbar-link(href='/network')
                   span.fa.fa-share-alt
                   span.menu-text #{settings.locale.menu_network}
-            if settings.display.masternodes == true
-              li#network
-                a.navbar-link(href='/masternodes')
-                  span.fa.fa-connectdevelop
-                  span.menu-text #{settings.locale.menu_masternodes}
             if settings.display.richlist == true
               li#richlist
                 a.navbar-link(href='/richlist')
@@ -170,6 +161,8 @@ html
                label#difficultyHybrid -
               else
                label#difficulty -
+        .col-md-2.col-sm-12
+          img(src=settings.logo, style='margin-top:-15px;height:128px;')
         .col-md-2
           .panel.panel-default.hidden-sm.hidden-xs
             .panel-heading
@@ -181,24 +174,28 @@ html
                label#lblX1
               else
                label#supply -
-        if settings.masternodes.collateral
-          .col-md-2
-            .panel.panel-default.hidden-sm.hidden-xs
-              .panel-heading
-                strong #{settings.locale.ex_circulating} (#{settings.symbol})
-              .panel-body
-                label#circulating -
+              if settings.index.show_market_cap == true && settings.index.show_market_cap_over_price != true
+                <br>
+                label (
+                label#marketCap -
+                label )
         .col-md-2
           .panel.panel-default.hidden-sm.hidden-xs
-            .panel-heading
-              strong #{settings.markets.exchange} Price
-            .panel-body
-              if settings.index.difficulty == 'Hybrid'
-               label#lastPrice -
-               <br>
-               label#lblX1
-              else
-               label#lastPrice -
+            if settings.index.show_market_cap != true || settings.index.show_market_cap_over_price != true
+              .panel-heading
+                strong #{settings.markets.exchange} Price
+              .panel-body
+                if settings.index.difficulty == 'Hybrid'
+                  label#lastPrice -
+                  <br>
+                  label#lblX1
+                else
+                  label#lastPrice -
+            if settings.index.show_market_cap == true && settings.index.show_market_cap_over_price == true
+              .panel-heading
+                strong Market Cap
+              .panel-body
+                label#marketCap -
 
       .row.text-center(style='margin-top:10px;margin-bottom:20px;')
         form.form-inline(method='post', action='/search')
@@ -228,11 +225,11 @@ html
             li.pull-left
               a#youtube-icon(href="https://www.youtube.com/channel/"+settings.youtube, target='_blank')
                 span.glyphicon.fa.fa-youtube
-      .col-md-8
-        ul.nav.navbar-nav.navbar-right
-          li.nav-item.text-center(style='margin-left:80px;margin-right:80px;')
-            a.navbar-link(href='https://github.com/iquidus/explorer', target='_blank') Powered by Iquidus Explorer
-          li.nav-item.navbar-text
-            label#lblBlockcount.label.label-default -
-          li.nav-item.navbar-text
-            label#lblConnections.label.label-default -
+      .col-md-4
+        ul.nav
+          li.text-center(style='margin-left:80px;margin-right:80px;')
+            p(style='margin-top:15px;')
+              a.navbar-link(href='https://github.com/iquidus/explorer', target='_blank') Powered by Iquidus Explorer v#{settings.iquidus_version}
+      span.connections
+        label#lblBlockcount.label.label-default -
+        label#lblConnections.label.label-default -

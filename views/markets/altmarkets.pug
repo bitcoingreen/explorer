@@ -1,13 +1,11 @@
 extends menu
-
+ 
 block market_view
-  script.
-    console.log('#{marketdata.data}');
   .row
     .col-md-12  
       .panel.panel-default
         .panel-heading
-          strong #{settings.locale.bittrex} - #{marketdata.coin}/#{marketdata.exchange} - #{settings.locale.mkt_hours}
+          strong #{settings.locale.altmarkets} - #{marketdata.coin}/#{marketdata.exchange} - #{settings.locale.mkt_hours}
           a(href='#')
             span.fa.fa-line-chart.pull-right.view-chart-disabled.iquidus.market-toggle(data-toggle='tooltip', data-placement='bottom', title=settings.locale.mkt_no_chart) 
         table.table.table-bordered.summary-table 
@@ -15,26 +13,26 @@ block market_view
             tr
               th #{settings.locale.mkt_high}
               th #{settings.locale.mkt_low}
-              th #{settings.locale.mkt_volume}
+              th #{settings.locale.mkt_volume} (#{marketdata.coin})
+              th #{settings.locale.mkt_volume} (#{marketdata.exchange})
               th.hidden-xs #{settings.locale.mkt_top_bid}
               th.hidden-xs #{settings.locale.mkt_top_ask}
-              th.hidden-xs #{settings.locale.mkt_yesterday}
               th.hidden-xs #{settings.locale.mkt_last}
               th #{settings.locale.mkt_change}
           tbody
             tr
-              td #{marketdata.data.summary.High.toFixed(8)}
-              td #{marketdata.data.summary.Low.toFixed(8)}
-              td #{marketdata.data.summary.Volume.toFixed(8)}
-              td.hidden-xs #{marketdata.data.summary.Bid.toFixed(8)}
-              td.hidden-xs #{marketdata.data.summary.Ask.toFixed(8)}
-              td.hidden-xs #{marketdata.data.summary.PrevDay.toFixed(8)}
-              td.hidden-xs #{marketdata.data.summary.Last.toFixed(8)}
-              - var bittrex_change = (100 - ((parseFloat(marketdata.data.summary.PrevDay)/parseFloat(marketdata.data.summary.Last))*100)).toFixed(2);
-              if bittrex_change >= 0
-                td.success +#{bittrex_change} %
+              td #{marketdata.data.summary.high}
+              td #{marketdata.data.summary.low}
+              td #{marketdata.data.summary.volume}
+              td #{marketdata.data.summary.volume_btc}
+              td.hidden-xs #{marketdata.data.summary.bid}
+              td.hidden-xs #{marketdata.data.summary.ask}
+              td.hidden-xs #{marketdata.data.summary.last}
+              - var altmarkets_change = (marketdata.data.summary.change);
+              if altmarkets_change >= 0
+                td.success +#{altmarkets_change} %
               else
-                td.danger #{bittrex_change} %
+                td.danger #{altmarkets_change} %
   .row
     .col-md-6.col-xs-12
       .panel.panel-default
@@ -55,6 +53,7 @@ block market_view
                   =buy.amount
                 td.hidden-xs
                   =buy.total
+
     .col-md-6.col-xs-12
       .panel.panel-default
         .panel-heading
@@ -89,28 +88,30 @@ block market_view
               th.hidden-xs #{settings.locale.mkt_time_stamp}
           tbody
             each order in marketdata.data.history
-              if order.OrderType == 'BUY'
+              if order.side == 'up'
                 tr.success
                   td.hidden-xs
-                    =order.OrderType
+                    =order.side
                   td
-                    =order.Quantity.toFixed(8)
+                    =parseFloat(order.volume).toFixed(8)
                   td
-                    =order.Price.toFixed(8)
+                    =parseFloat(order.price).toFixed(8)
                   td
-                    =order.Total.toFixed(8)
+                    =parseFloat(order.funds).toFixed(8)
                   td.hidden-xs
-                    =order.TimeStamp
+                    =(new Date(order.timestamp * 1000).toUTCString())
               else
                 tr.danger 
                   td.hidden-xs
-                    =order.OrderType
+                    =order.side
                   td
-                    =order.Quantity.toFixed(8)
+                    =parseFloat(order.volume).toFixed(8)
                   td
-                    =order.Price.toFixed(8)
+                    =parseFloat(order.price).toFixed(8)
                   td
-                    =order.Total.toFixed(8)
+                    =parseFloat(order.funds).toFixed(8)
                   td.hidden-xs
-                    =order.TimeStamp
+                    =(new Date(order.timestamp * 1000).toUTCString())
+
       .footer-padding
+

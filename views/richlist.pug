@@ -1,6 +1,6 @@
 extends layout
 
-block content
+block content   
   script.
     $(document).ready(function(){
       var data = [
@@ -15,7 +15,7 @@ block content
             rendererOptions: {
               diameter: 260,
               padding: 0,
-              sliceMargin: 4,
+              sliceMargin: 4, 
               // Put data labels on the pie slices.
               // By default, labels show the percentage of the slice.
               showDataLabels: false,
@@ -33,9 +33,9 @@ block content
         }
       );
     });
-    $(window).resize(function () {
+    $(window).resize(function () { 
       pieWealthDist.replot( { resetAxes: false } );
-    });
+    });  
   .col-xs-12.col-md-8
     .tabpanel
       ul.nav.nav-tabs(role='tablist')
@@ -44,7 +44,7 @@ block content
         li(role='presentation')
           a(href='#received', aria-controls='received', role='tab', data-toggle='tab') Received
     .tab-content
-      #balance.tabpanel.tab-pane.active
+      #balance.tabpanel.tab-pane.active 
         include ./includes/rl_balance.pug
       #received.tabpanel.tab-pane
         include ./includes/rl_received.pug
@@ -64,25 +64,29 @@ block content
               th
                 div.pull-left(style='background-color:#d9534f;width:20px;height:20px;margin-right:6px;')
                 span #{settings.locale.rl_top25}
-              td #{parseFloat(dista.total).toFixed(8)}
+              - var total = parseFloat(dista.total).toLocaleString('en',{'minimumFractionDigits':2,'maximumFractionDigits':8,'useGrouping':true})
+              td #{total}
               td.text-center #{parseFloat(dista.percent).toFixed(2)}
             tr
               th
                 div.pull-left(style='background-color:#5cb85c;width:20px;height:20px;margin-right:6px;')
                 span #{settings.locale.rl_top50}
-              td #{parseFloat(distb.total).toFixed(8)}
+              - var total = parseFloat(distb.total).toLocaleString('en',{'minimumFractionDigits':2,'maximumFractionDigits':8,'useGrouping':true})
+              td #{total}
               td.text-center #{parseFloat(distb.percent).toFixed(2)}
             tr
               th
                 div.pull-left(style='background-color:#428bca;width:20px;height:20px;margin-right:6px;')
                 span #{settings.locale.rl_top75}
-              td #{parseFloat(distc.total).toFixed(8)}
+              - var total = parseFloat(distc.total).toLocaleString('en',{'minimumFractionDigits':2,'maximumFractionDigits':8,'useGrouping':true})
+              td #{total}
               td.text-center #{parseFloat(distc.percent).toFixed(2)}
             tr
               th
                 div.pull-left(style='background-color:#222;width:20px;height:20px;margin-right:6px;')
                 span #{settings.locale.rl_top100}
-              td #{parseFloat(distd.total).toFixed(8)}
+              - var total = parseFloat(distd.total).toLocaleString('en',{'minimumFractionDigits':2,'maximumFractionDigits':8,'useGrouping':true})
+              td #{total}
               td.text-center #{parseFloat(distd.percent).toFixed(2)}
             tr
               th

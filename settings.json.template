@@ -40,24 +40,19 @@
     "port": 27017
   },
 
-  // Redis settings (request caching)
-  "redis": {
-    "enabled": false,
-    "address": "localhost:6379",
-    "db": 0,
-    "expire": 60
-  },
-
   //update script settings
   "update_timeout": 10,
   "check_timeout": 250,
+  "block_parallel_tasks": 1,
 
   // wallet settings
+  "use_rpc": false,
+
   "wallet": {
     "host": "localhost",
     "port": 9332,
-    "user": "darkcoinrpc",
-    "pass": "123gfjk3R3pCCVjHtbRde2s5kzdf233sa"
+    "username": "darkcoinrpc",
+    "password": "123gfjk3R3pCCVjHtbRde2s5kzdf233sa"
   },
 
   // confirmations
@@ -77,15 +72,19 @@
     "youtube": false,
     "search": true,
     "movement": true,
-    "network": true,
-    "masternodes": false
+    "network": true
   },
 
   // index page (valid options for difficulty are POW, POS or Hybrid)
   "index": {
     "show_hashrate": true,
+    // Show Market Cap in header
+    "show_market_cap": false,
+    // Show Market Cap in place of price box
+    "show_market_cap_over_price": false,
     "difficulty": "POW",
-    "last_txs": 100
+    "last_txs": 100,
+    "txs_per_page": 10
   },
 
   // ensure links on API page are valid
@@ -97,7 +96,7 @@
   },
 
   // market settings
-  //supported markets: bittrex, bleutrade, ccex, coinexchange, cryptsy, empoex, poloniex, yobit
+  //supported markets: bittrex, poloniex, yobit, empoex, bleutrade, cryptopia, ccex
   //default market is loaded by default and determines last price in header
   "markets": {
     "coin": "JBS",
@@ -136,8 +135,12 @@
   //heavy (enable/disable additional heavy features)
   "heavy": false,
 
+  //disable saving blocks & TXs via API during indexing.
+  "lock_during_index": false,
+
   //amount of txs to index per address (stores latest n txs)
   "txcount": 100,
+  "txcount_per_page": 50,
 
   //show total sent & received on address page (set false if PoS)
   "show_sent_received": true,
@@ -167,11 +170,5 @@
   "labels": {
   //  "JSoEdU717hvz8KQVq2HfcqV9A79Wihzusu": {"label": "Developers address", "type":"primary", "url":"http://example.com"},
   //  "JSWVXHWeYNknPdG9uDrcBoZHztKMFCsndw": {"label": "Cryptsy"}
-  },
-
-  // Masternode configuration
-  "masternodes": {
-    "enabled": false,
-    "collateral": 1000
   }
 }
