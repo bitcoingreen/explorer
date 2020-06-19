@@ -89,7 +89,8 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/') #{settings.title}
+          a.navbar-brand(href='/')
+            img(src=settings.logo)
         .collapse.navbar-collapse(id='navbar-collapse')
           ul.nav.navbar-nav
             li#home
@@ -128,7 +129,7 @@ html
                   span.menu-text #{settings.locale.menu_api}
     .col-md-12
       .row.text-center
-        .col-md-2.col-md-offset-1
+        .col-md-2.col-md-offset-2
           .panel.panel-default.hidden-sm.hidden-xs
             .panel-heading
               if settings.nethash_units == 'K'
@@ -161,8 +162,6 @@ html
                label#difficultyHybrid -
               else
                label#difficulty -
-        .col-md-2.col-sm-12
-          img(src=settings.logo, style='margin-top:-15px;height:128px;')
         .col-md-2
           .panel.panel-default.hidden-sm.hidden-xs
             .panel-heading
