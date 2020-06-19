@@ -228,14 +228,16 @@ html
             li.pull-left
               a#googleplus-icon(href="https://plus.google.com/#{settings.googleplus}", target='_blank')
                 span.glyphicon.fa.fa-google-plus
-      .col-md-4
-        ul.nav
-          li.text-center(style='margin-left:80px;margin-right:80px;')
-            p(style='margin-top:15px;')
-              a.navbar-link(href='https://github.com/iquidus/explorer', target='_blank') Powered by Iquidus Explorer
-      span.connections
-        label#lblBlockcount.label.label-default -
-        label#lblConnections.label.label-default -
-
-
-
+        if settings.display.youtube
+          ul.nav.navbar-nav
+            li.pull-left
+              a#youtube-icon(href="https://www.youtube.com/channel/#{settings.youtube}", target='_blank')
+                span.glyphicon.fa.fa-youtube
+      .col-md-8
+        ul.nav.navbar-nav.navbar-right
+          li.nav-item.text-center(style='margin-left:80px;margin-right:80px;')
+            a.navbar-link(href='https://github.com/iquidus/explorer', target='_blank') Powered by Iquidus Explorer
+          li.nav-item.navbar-text
+            label#lblBlockcount.label.label-default -
+          li.nav-item.navbar-text
+            label#lblConnections.label.label-default -
